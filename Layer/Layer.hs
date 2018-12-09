@@ -21,7 +21,7 @@ module Layer.Layer
   Layer(..)
 ) where
 
-import SDR.SDR
+import SDR.SDR (SDR)
  
 class Layer l where
     run :: l -> l

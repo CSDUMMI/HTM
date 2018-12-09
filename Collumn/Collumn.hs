@@ -22,4 +22,27 @@ module Collumn.Collumn
   Collumn (..)
 ) where
 
-data Collumn = Collumn
+import qualified SDR.SDR
+import qualified Layer.Layer
+
+data Collumn = 
+    Collumn {
+              output :: SDR.SDR
+            , layers :: [a]
+            }
+
+input :: SDR.SDR -> Collumn -> Collumn
+input sdr cl = Collumn {
+                         output = output cl
+                       , layers = (input sdr . head . layers cl) : tail layers
+                       }
+-- |  run - Run every Layer once
+run :: Collumn -> Collumn
+run cl = 
+    let new_ly1 = Layer.run $ head $ layers cl
+    in adjust_output . run . input Collumn {
+                                             output = output cl
+                                           , layers = new_ly1:tail layers cl
+                                           }
+                                          
+                                          
