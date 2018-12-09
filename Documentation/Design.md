@@ -10,3 +10,14 @@ that are each execute in order and given as input the output of the previous.
 For both the Collumn and the Layer there will be Typeclass that let you define them yourself. 
 If you don‘t want to do that, you can use one of the Collumns and Layers 
 that is  defined as a part of this Typeclass.
+The Typeclass for a Collumn is very simple:
+```haskell
+class Collumn a where
+    run :: SDR -> Collumn -> Collumn
+    output :: Collumn -> SDR
+```
+The Semantic is simple as well, the `run` function executes the 
+Collumn with an `SDR` given as its input.
+After that the `output` can be used on the resulting Collumn to
+get the output of the Collumn, what is the same as asking
+for the last SDR the last Layer of the Collumn had as an output.
