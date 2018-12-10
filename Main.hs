@@ -1,9 +1,11 @@
 module Main where
-import qualified Layer.Layer
-import qualified Collumn.Collumn
-import qualified SDR.SDR
+
 import qualified Lib.Quicksort
 import qualified Lib.Remove_Duplicates
+import qualified SDR.SDR
+import qualified Layer.Layer
+import qualified Collumn.Collumn
+
 import System.IO
 import System.Exit
 

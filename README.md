@@ -16,6 +16,7 @@ class Collumn a where
     run :: SDR.SDR -> a -> a
     output :: Collumn -> SDR.SDR
 ```
+(Collumn/Collumn.hs)
 The Semantic is simple as well, the `run` function executes the 
 Collumn with an `SDR` given as its input.
 After that the `output` can be used on the resulting Collumn to
@@ -29,6 +30,27 @@ transforms that into another SDR.
 class Layer a where
     run :: SDR.SDR -> Collumn.Collumn -> Collumn.Collumn
 ```
+(Layer/Layer.hs)
 Attention: You should only import these Modules as qualified
 because I will probably use some very generic names such as
 `run`.
+
+### The `MCollumn` and `IdentityLayer`
+I already defined an Instance of the `Collumn` Class. 
+It can be used whenever you need a minimal `Collumn`.
+
+`MCollumn` is simply defined as having
+a List of pairs of the Layer and 
+the output of the Layer.
+To use it and show that it works there
+is another Instance of the `Layer` Class
+that simply returns whatever was given to it.
+You can just define it yourself:
+```haskell
+data IdentityLayer = IdentityLayer
+
+instance Layer.Layer IdentityLayer where
+    run sdr ly cl = sdr
+```
+(test/IdentityLayer.hs)
+

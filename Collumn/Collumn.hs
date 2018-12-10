@@ -22,8 +22,8 @@ module Collumn.Collumn
   Collumn (..)
 ) where
 
-import qualified SDR.SDR
-import qualified Layer.Layer
+import qualified SDR.SDR as SDR
+import qualified Layer.Layer as Layer
 
 class Collumn a where
     run :: SDR.SDR -> a -> a
