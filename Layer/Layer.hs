@@ -21,10 +21,10 @@ module Layer.Layer
   Layer(..)
 ) where
 
-import SDR.SDR (SDR)
- 
+import qualified SDR.SDR as SDR
+
 class Layer l where
-    run :: l -> l
-    input :: SDR -> l -> l
-    output :: l -> SDR
+    run :: SDR.SDR -> l -> c -> SDR.SDR
+    input :: SDR.SDR -> l -> l
+    output :: l -> SDR.SDR
 

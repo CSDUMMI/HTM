@@ -28,4 +28,13 @@ import qualified Layer.Layer as Layer
 class Collumn a where
     run :: SDR.SDR -> a -> a
     output :: a -> SDR.SDR
-                                         
+
+-- | An Instance of Collumn that does the basic
+-- work of a Collumn
+
+data MCollumn = MCollumn {
+    layers :: [(SDR.SDR,Layer.Layer a)] -- (prev_output,Layer)
+}
+instance Collumn MCollumn where
+   output = last . layers
+   
