@@ -21,10 +21,10 @@ module Layer.Layer
   Layer(..)
 ) where
 
-import qualified SDR.SDR as SDR
+import qualified SDR.SDR (SDR)
 
-class Layer l where
-    run :: SDR.SDR -> l -> c -> SDR.SDR
-    input :: SDR.SDR -> l -> l
-    output :: l -> SDR.SDR
+data Layer = Layer {
+      fn :: (SDR -> SDR) -- Currying 
+    , state :: [[ Double ]] -- Every State can be represented using a Matrix.
+}
 
