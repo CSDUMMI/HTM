@@ -26,6 +26,6 @@ import qualified SDR.SDR
 import qualified Layer.Layer
 
 class Collumn a where
-    run :: SDR -> Collumn -> Collumn
-    output :: Collumn -> SDR
+    run :: SDR.SDR -> a -> a
+    output :: a -> SDR.SDR
                                          
