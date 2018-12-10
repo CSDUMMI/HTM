@@ -13,7 +13,7 @@ that is  defined as a part of this Typeclass.
 The Typeclass for a Collumn is very simple:
 ```haskell
 class Collumn a where
-    run :: SDR.SDR -> Collumn -> Collumn
+    run :: SDR.SDR -> a -> a
     output :: Collumn -> SDR.SDR
 ```
 The Semantic is simple as well, the `run` function executes the 
