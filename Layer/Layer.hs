@@ -15,16 +15,18 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 -}
-
-module Layer.Layer 
+module Layer.Layer
 (
-  Layer(..)
+  State (..),
+  Layer (..)
 ) where
 
-import qualified SDR.SDR (SDR)
+import qualified SDR.SDR as SDR
+
+data State =
+     IdentityLayer SDR.SDR -- The last Output, isn't important
 
 data Layer = Layer {
-      fn :: (SDR -> SDR) -- Currying 
-    , state :: [[ Double ]] -- Every State can be represented using a Matrix.
+    state :: State, -- Last State of the Layer 
+    fn :: SDR.SDR -> Layer -> (Layer,SDR.SDR) -- Next State and the Output SDR
 }
-

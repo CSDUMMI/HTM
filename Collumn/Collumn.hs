@@ -19,22 +19,35 @@
 
 module Collumn.Collumn
 (
-  Collumn (..)
+  Collumn (..),
+  MColumn (..)
 ) where
 
-import qualified SDR.SDR as SDR
+import qualified SDR.SDR (SDR)
 import qualified Layer.Layer as Layer
 
 class Collumn a where
     run :: SDR.SDR -> a -> a
     output :: a -> SDR.SDR
 
--- | An Instance of Collumn that does the basic
--- work of a Collumn
 
+
+-- | An Instance of Collumn that does the basic
+-- work of a Collum
 data MCollumn = MCollumn {
-    layers :: [(SDR.SDR,Layer.Layer a)] -- (prev_output,Layer)
+    layers :: [Layer],
+    m_output :: SDR
 }
-instance Collumn MCollumn where
-   output = last . layers
-   
+
+runMCollumn input col = 
+    let col_fns     = map Layer.fn $ layers col -- All the fns of the layers
+        col_lys_fns = zip col_fns (layers col)
+        col_output  = foldl (\(a:as) x -> ((fst x) (snd a) (snd x)):a:as) [] col_lys_fns
+    in MCollumn {
+        layers = map fst col_output :: [Layer],
+        m_output = snd . last col_output
+    }
+  
+instance Collumn MCollumn wherei
+    output = m_output
+    run input col = runMCollumn

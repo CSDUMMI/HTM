@@ -13,7 +13,8 @@ print_welcome = do
     putStrLn "HTM-Modular  Copyright (C) 2018  Joris Gutjahr "
     putStrLn "This program comes with ABSOLUTELY NO WARRANTY "
     putStrLn "This is free software, and you are welcome to redistribute it"
-    putStrLn "under certain conditions; type `:license' for details."
+    putStrLn "under certain conditions; type `:license` for details."
+
 print_license = do
     handle <- openFile "LICENSE" ReadMode
     contents <- hGetContents handle
@@ -23,6 +24,7 @@ print_license = do
 apply_command ":license" = print_license
 apply_command ":q" = apply_command ":quit"
 apply_command ":quit" = exitSuccess
+
 apply_command failure = do
     putStrLn "I didn't implement your feature."
     putStrLn "If you want me to implement your feature"
